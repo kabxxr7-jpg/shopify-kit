@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+.DS_Store
+data/
+*.db
+*.db-wal
+*.db-shm
+.mutation-*/
+.test-tmp/
+.theme-check-home/

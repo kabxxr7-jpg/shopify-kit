@@ -1,0 +1,27 @@
+{
+  "name": "shopify-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shopify custom-app building blocks (OAuth install flow, verified and deduplicated webhooks incl. the three compliance topics, a cost-aware Admin GraphQL orders client, an integer-cent sales aggregator with a reconciliation harness) and a Liquid theme fixed with the real theme-check. Tested against a local mock Admin API and fixtures written from Shopify's public documentation; never run on Shopify.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "engines": {
+    "node": ">=25"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "serve": "node scripts/serve.ts",
+    "reconcile": "node scripts/reconcile.ts",
+    "fixtures:generate": "node scripts/generate-fixtures.ts",
+    "theme:check": "node scripts/theme-check.mjs",
+    "mutation-check": "node scripts/mutation-check.mjs",
+    "mutation-selftest": "node scripts/mutation-check.mjs --selftest"
+  },
+  "devDependencies": {
+    "@shopify/theme-check-node": "^3.31.0",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.12"
+  }
+}
