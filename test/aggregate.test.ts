@@ -21,6 +21,19 @@ describe("metrics for single orders", () => {
     expect(r.totals["CAD"]).toEqual({ orders: 1, gross_sales: 4850, discounts: 0, net_sales_reversals: 0, net_sales: 4850, shipping_charges: 800, shipping_reversals: 0, taxes: 735, tax_reversals: 0, other_refunds: 0, total_sales: 6385 });
   });
 
+  it("a shipping line that was removed from the order (isRemoved) is not charged", () => {
+    const o = made({ shipping: [800], tax: 0, expectTotal: 1800 });
+    const removed = structuredClone(o.shippingLines.nodes[0]!);
+    removed.id = "gid://shopify/ShippingLine/4001999";
+    removed.isRemoved = true;
+    removed.discountedPriceSet.shopMoney!.amount = "5.00";
+    removed.discountedPriceSet.presentmentMoney!.amount = "5.00";
+    o.shippingLines.nodes.push(removed);
+    const r = aggregateSales([o], TORONTO);
+    expect(r.issues).toEqual([]);
+    expect(r.totals["CAD"]).toMatchObject({ shipping_charges: 800, total_sales: 1800 });
+  });
+
   it("discounts reduce net sales but not gross sales", () => {
     const m = aggregateSales([byName("#1003")], { ...TORONTO, until: "2026-10-31" }).totals["CAD"]!;
     expect(m.gross_sales).toBe(21000);

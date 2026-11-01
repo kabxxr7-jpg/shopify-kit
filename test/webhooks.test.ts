@@ -307,6 +307,17 @@ describe("compliance webhooks", () => {
     ]);
   });
 
+  it("customers/redact clears an order named in orders_to_redact even when the stored order carries no matching customer id", async () => {
+    const { db, send } = setup();
+    // a guest-style order: an email, but no customer object, so the lookup by customer id cannot find it
+    await send(delivery(orderPayload({ customer: null }), { topic: "orders/create" }));
+    const before = db.prepare("SELECT email, customer_id, redacted FROM orders_seen WHERE order_id = '5000001001'").get() as Record<string, unknown>;
+    expect(before).toEqual({ email: "ada@example.invalid", customer_id: null, redacted: 0 });
+    await send(delivery(customerRedactPayload(), { topic: "customers/redact" }));
+    const after = db.prepare("SELECT email, customer_id, redacted FROM orders_seen WHERE order_id = '5000001001'").get() as Record<string, unknown>;
+    expect(after).toEqual({ email: null, customer_id: null, redacted: 1 });
+  });
+
   it("redaction arriving before the order leaves a tombstone, so a late orders/create cannot store the email", async () => {
     const { db, send } = setup();
     await send(delivery(customerRedactPayload(), { topic: "customers/redact" }));
