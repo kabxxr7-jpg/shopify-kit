@@ -1,0 +1,111 @@
+{
+  "provenance": "HAND-WRITTEN from Shopify's published metric definitions (ShopifyQL sales schema, Admin API 2026-10, read 2026-11-01; see docs/SOURCES.md). It was NOT exported from a Shopify store and is NOT a Shopify report: the kit's author has no store. Every figure was worked out on paper from the order specs in testing/order-fixtures.ts, independently of src/aggregate.ts; the 'derivation' on each row shows the sum. What reconciling to this file proves: the code implements these definitions without arithmetic slips. What it cannot prove: that Shopify's own report applies the same definitions (README, Limits).",
+  "window": {
+    "from": "2026-10-29",
+    "until": "2026-11-03",
+    "timeZone": "America/Toronto"
+  },
+  "shop": {
+    "domain": "harbour-pine-demo.myshopify.com",
+    "currency": "CAD",
+    "timeZone": "America/Toronto"
+  },
+  "mode": "shop currency",
+  "rows": [
+    {
+      "day": "2026-10-30",
+      "currency": "CAD",
+      "orders": 2,
+      "gross_sales": "78.50",
+      "discounts": "3.00",
+      "net_sales_reversals": "0.00",
+      "net_sales": "75.50",
+      "shipping_charges": "14.00",
+      "shipping_reversals": "0.00",
+      "taxes": "11.64",
+      "tax_reversals": "0.00",
+      "other_refunds": "0.00",
+      "total_sales": "101.14",
+      "derivation": "#1001 (48.50, ship 8.00, tax 7.35) + #1002 (30.00 - 3.00, ship 6.00, tax 4.29); #1002 is 2026-10-31T03:30Z = Oct 30 23:30 EDT, so it belongs to Oct 30. total 63.85 + 37.29"
+    },
+    {
+      "day": "2026-10-31",
+      "currency": "CAD",
+      "orders": 2,
+      "gross_sales": "222.50",
+      "discounts": "21.00",
+      "net_sales_reversals": "0.00",
+      "net_sales": "201.50",
+      "shipping_charges": "8.00",
+      "shipping_reversals": "0.00",
+      "taxes": "27.24",
+      "tax_reversals": "0.00",
+      "other_refunds": "0.00",
+      "total_sales": "236.74",
+      "derivation": "#1003 (210.00 - 21.00, ship 0, tax 24.57) + #1004 (12.50, ship 8.00, tax 2.67); #1004 is 2026-11-01T03:59Z = Oct 31 23:59 EDT. total 213.57 + 23.17"
+    },
+    {
+      "day": "2026-11-01",
+      "currency": "CAD",
+      "orders": 0,
+      "gross_sales": "0.00",
+      "discounts": "0.00",
+      "net_sales_reversals": "147.00",
+      "net_sales": "-147.00",
+      "shipping_charges": "0.00",
+      "shipping_reversals": "0.00",
+      "taxes": "0.00",
+      "tax_reversals": "19.11",
+      "other_refunds": "0.00",
+      "total_sales": "-166.11",
+      "derivation": "refund of #1003 (27.00 + tax 3.51) at 2026-11-02T04:30Z = Nov 1 23:30 EST, plus refund of #1009 (120.00 + tax 15.60) at 2026-11-01T14:00Z. No sale this day: #1005 is a test order, #1006 is cancelled. total -(30.51 + 135.60)"
+    },
+    {
+      "day": "2026-11-02",
+      "currency": "CAD",
+      "orders": 3,
+      "gross_sales": "210.50",
+      "discounts": "7.25",
+      "net_sales_reversals": "0.00",
+      "net_sales": "203.25",
+      "shipping_charges": "28.00",
+      "shipping_reversals": "0.00",
+      "taxes": "30.06",
+      "tax_reversals": "0.00",
+      "other_refunds": "0.00",
+      "total_sales": "261.31",
+      "derivation": "#1007 (120.00, ship 12.00, tax 17.16; 2026-11-02T05:00Z = Nov 2 00:00 EST exactly) + #1008 (72.50 - 7.25, ship 8.00, tax 9.52) + #1010 (18.00, ship 8.00, tax 3.38). total 149.16 + 82.77 + 29.38"
+    },
+    {
+      "day": "2026-11-03",
+      "currency": "CAD",
+      "orders": 0,
+      "gross_sales": "0.00",
+      "discounts": "0.00",
+      "net_sales_reversals": "12.50",
+      "net_sales": "-12.50",
+      "shipping_charges": "0.00",
+      "shipping_reversals": "16.00",
+      "taxes": "0.00",
+      "tax_reversals": "3.71",
+      "other_refunds": "0.00",
+      "total_sales": "-32.21",
+      "derivation": "refund of #1004 (12.50 + tax 1.63, shipping 8.00 + tax 1.04) + refund of #1008 (shipping 8.00 + tax 1.04). total -(23.17 + 9.04)"
+    }
+  ],
+  "totals": {
+    "CAD": {
+      "orders": 7,
+      "gross_sales": "511.50",
+      "discounts": "31.25",
+      "net_sales_reversals": "159.50",
+      "net_sales": "320.75",
+      "shipping_charges": "50.00",
+      "shipping_reversals": "16.00",
+      "taxes": "68.94",
+      "tax_reversals": "22.82",
+      "other_refunds": "0.00",
+      "total_sales": "400.87"
+    }
+  }
+}
