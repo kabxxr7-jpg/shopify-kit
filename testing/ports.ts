@@ -6,8 +6,14 @@ import type { AddressInfo } from "node:net";
 export const PORT_MIN = 4770;
 export const PORT_MAX = 4789;
 
+// Within one process the next server starts at the port after the previous one instead of at a random port.
+// Two consecutive servers on the same port made fetch() (which keeps idle connections in a pool per address) reuse
+// a connection the old server had just closed, which showed up as a load-dependent ECONNRESET in the tests.
+// A different process picks its own random starting point, and EADDRINUSE moves a server on to the next port.
+let nextStart = PORT_MIN + Math.floor(Math.random() * (PORT_MAX - PORT_MIN + 1));
+
 export async function listenInRange(server: Server, preferred?: number): Promise<number> {
-  const start = preferred ?? PORT_MIN + Math.floor(Math.random() * (PORT_MAX - PORT_MIN + 1));
+  const start = preferred ?? nextStart;
   const span = PORT_MAX - PORT_MIN + 1;
   for (let i = 0; i < span; i++) {
     const port = PORT_MIN + ((start - PORT_MIN + i) % span);
@@ -25,7 +31,9 @@ export async function listenInRange(server: Server, preferred?: number): Promise
         server.once("listening", onListening);
         server.listen(port, "127.0.0.1");
       });
-      return (server.address() as AddressInfo).port;
+      const bound = (server.address() as AddressInfo).port;
+      nextStart = PORT_MIN + ((bound - PORT_MIN + 1) % span);
+      return bound;
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== "EADDRINUSE") throw error;
     }
