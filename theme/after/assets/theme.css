@@ -1,0 +1,4 @@
+.site-header { display: flex; gap: 1rem; align-items: center; }
+.featured-collection__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 1rem; list-style: none; padding: 0; }
+.product-card img { max-width: 100%; height: auto; }
+.badge { background: #b00020; color: #fff; padding: 0 0.4rem; }

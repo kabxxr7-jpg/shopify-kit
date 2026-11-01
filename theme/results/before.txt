@@ -1,0 +1,7 @@
+theme-check 3.31.0 on theme/before (node v26.13.0; docs bundled revision 40f966f)
+layout/theme.liquid:13:5  error   ParserBlockingScript  Avoid parser blocking scripts by adding `defer` or `async` on this tag
+sections/product-main.liquid:4:45  warning UndefinedObject  Unknown object 'prodcut' used.
+snippets/price.liquid:5:3  warning UnusedAssign  The variable 'sale_label' is assigned but not used
+snippets/product-card.liquid:4:7  error   ImgWidthAndHeight  Missing width and height attributes on img tag
+snippets/product-card.liquid:14:15  error   MissingTemplate  'snippets/product-badge.liquid' does not exist
+5 offense(s) in 10 files: 3 error, 2 warning, 0 info

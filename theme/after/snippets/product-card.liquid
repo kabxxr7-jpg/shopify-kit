@@ -1,0 +1,18 @@
+<article class="product-card">
+  <a href="{{ product.url }}">
+    {%- if product.featured_image %}
+      <img
+        src="{{ product.featured_image | image_url: width: 400 }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        width="400"
+        height="{{ 400 | divided_by: product.featured_image.aspect_ratio | round }}"
+        loading="lazy"
+      >
+    {%- endif %}
+    <h3>{{ product.title }}</h3>
+  </a>
+  {% render 'price', product: product %}
+  {%- if show_badge %}
+    {% render 'product-badge', product: product %}
+  {%- endif %}
+</article>

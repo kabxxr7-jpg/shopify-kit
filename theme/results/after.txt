@@ -1,0 +1,2 @@
+theme-check 3.31.0 on theme/after (node v26.13.0; docs bundled revision 40f966f)
+0 offenses in 11 files

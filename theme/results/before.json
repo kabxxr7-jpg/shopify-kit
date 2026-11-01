@@ -1,0 +1,61 @@
+{
+  "tool": {
+    "@shopify/theme-check-node": "3.31.0",
+    "@shopify/theme-check-common": "3.31.0"
+  },
+  "node": "v26.13.0",
+  "docs": {
+    "source": "bundled in @shopify/theme-check-docs-updater",
+    "revision": "40f966fc7793462726d9f8573c8d522f8ab44c54"
+  },
+  "config": "theme-check:recommended (the folder's .theme-check.yml)",
+  "theme": "theme/before",
+  "filesChecked": 10,
+  "counts": {
+    "error": 3,
+    "warning": 2,
+    "info": 0
+  },
+  "offenses": [
+    {
+      "file": "layout/theme.liquid",
+      "line": 13,
+      "column": 5,
+      "check": "ParserBlockingScript",
+      "severity": "error",
+      "message": "Avoid parser blocking scripts by adding `defer` or `async` on this tag"
+    },
+    {
+      "file": "sections/product-main.liquid",
+      "line": 4,
+      "column": 45,
+      "check": "UndefinedObject",
+      "severity": "warning",
+      "message": "Unknown object 'prodcut' used."
+    },
+    {
+      "file": "snippets/price.liquid",
+      "line": 5,
+      "column": 3,
+      "check": "UnusedAssign",
+      "severity": "warning",
+      "message": "The variable 'sale_label' is assigned but not used"
+    },
+    {
+      "file": "snippets/product-card.liquid",
+      "line": 4,
+      "column": 7,
+      "check": "ImgWidthAndHeight",
+      "severity": "error",
+      "message": "Missing width and height attributes on img tag"
+    },
+    {
+      "file": "snippets/product-card.liquid",
+      "line": 14,
+      "column": 15,
+      "check": "MissingTemplate",
+      "severity": "error",
+      "message": "'snippets/product-badge.liquid' does not exist"
+    }
+  ]
+}

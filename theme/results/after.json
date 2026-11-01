@@ -1,0 +1,20 @@
+{
+  "tool": {
+    "@shopify/theme-check-node": "3.31.0",
+    "@shopify/theme-check-common": "3.31.0"
+  },
+  "node": "v26.13.0",
+  "docs": {
+    "source": "bundled in @shopify/theme-check-docs-updater",
+    "revision": "40f966fc7793462726d9f8573c8d522f8ab44c54"
+  },
+  "config": "theme-check:recommended (the folder's .theme-check.yml)",
+  "theme": "theme/after",
+  "filesChecked": 11,
+  "counts": {
+    "error": 0,
+    "warning": 0,
+    "info": 0
+  },
+  "offenses": []
+}

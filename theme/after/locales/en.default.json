@@ -1,0 +1,15 @@
+{
+  "general": {
+    "navigation": "Main navigation",
+    "cart": "Cart"
+  },
+  "sections": {
+    "featured_collection": {
+      "empty": "Choose a collection in the theme editor."
+    }
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sale": "Sale"
+  }
+}

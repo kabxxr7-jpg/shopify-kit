@@ -1,0 +1,18 @@
+<section class="product-main">
+  <h1>{{ product.title }}</h1>
+  <div class="product-main__price">{% render 'price', product: product %}</div>
+  <div class="product-main__description">{{ product.description }}</div>
+  {%- form 'product', product %}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit"{% unless product.available %} disabled{% endunless %}>
+      {{- 'products.add_to_cart' | t -}}
+    </button>
+  {%- endform %}
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

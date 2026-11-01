@@ -1,0 +1,14 @@
+{%- liquid
+  assign current_price = product.price
+  assign compare_price = product.compare_at_price
+  assign on_sale = false
+  if compare_price > current_price
+    assign on_sale = true
+  endif
+-%}
+<div class="price">
+  {%- if on_sale %}
+    <s class="price__compare">{{ compare_price | money }}</s>
+  {%- endif %}
+  <span class="price__current">{{ current_price | money }}</span>
+</div>

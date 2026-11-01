@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "products_to_show": 4,
+        "show_badge": true
+      }
+    }
+  },
+  "order": ["featured"]
+}
