@@ -6,13 +6,18 @@ import { describe, expect, it } from "vitest";
 
 const root = new URL("../", import.meta.url).pathname;
 const read = (path: string): string => readFileSync(`${root}${path}`, "utf8");
+// The first line of the output names the Node version that ran it; that is provenance, not a finding, so it is ignored in the comparison.
+const sameOutput = (actual: string, committed: string): void => {
+  const noNode = (text: string): string => text.replace(/\(node v\d+\.\d+\.\d+;/, "(node vX;");
+  expect(noNode(actual)).toBe(noNode(committed));
+};
 const run = (dir: string) => spawnSync(process.execPath, ["scripts/theme-check.mjs", dir, "--offline"], { cwd: root, encoding: "utf8", timeout: 120_000 });
 
 describe("theme-check on the sample theme", () => {
   it("finds exactly the five planted problems in theme/before, with the checks the README names", () => {
     const r = run("theme/before");
     expect(r.status).toBe(1);
-    expect(r.stdout).toBe(read("theme/results/before.txt"));
+    sameOutput(r.stdout, read("theme/results/before.txt"));
     const results = JSON.parse(read("theme/results/before.json")) as { offenses: Array<{ check: string; file: string }> };
     expect(results.offenses.map((o) => [o.check, o.file])).toEqual([
       ["ParserBlockingScript", "layout/theme.liquid"],
@@ -26,7 +31,7 @@ describe("theme-check on the sample theme", () => {
   it("is clean after the fixes: zero offenses of any severity", () => {
     const r = run("theme/after");
     expect(r.status).toBe(0);
-    expect(r.stdout).toBe(read("theme/results/after.txt"));
+    sameOutput(r.stdout, read("theme/results/after.txt"));
     expect(r.stdout).toContain("0 offenses");
   });
 
